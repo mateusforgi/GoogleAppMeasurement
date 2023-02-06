@@ -24,39 +24,13 @@ let package = Package(
     .library(
       name: "GoogleAppMeasurement",
       targets: ["GoogleAppMeasurementTarget"]
-    ),
-    .library(
-      name: "GoogleAppMeasurementWithoutAdIdSupport",
-      targets: ["GoogleAppMeasurementWithoutAdIdSupportTarget"]
-    ),
-    .library(
-      name: "GoogleAppMeasurementOnDeviceConversion",
-      targets: ["GoogleAppMeasurementOnDeviceConversionTarget"]
-    ),
-  ],
-  dependencies: [
-    .package(
-      name: "GoogleUtilities",
-      url: "https://github.com/google/GoogleUtilities.git",
-      "7.2.1" ..< "8.0.0"
-    ),
-    .package(
-      name: "nanopb",
-      url: "https://github.com/firebase/nanopb.git",
-      "2.30908.0" ..< "2.30910.0"
-    ),
+    )
   ],
   targets: [
     .target(
       name: "GoogleAppMeasurementTarget",
       dependencies: [
-        "GoogleAppMeasurementIdentitySupport",
-        "GoogleAppMeasurement",
-        .product(name: "GULAppDelegateSwizzler", package: "GoogleUtilities"),
-        .product(name: "GULMethodSwizzler", package: "GoogleUtilities"),
-        .product(name: "GULNSData", package: "GoogleUtilities"),
-        .product(name: "GULNetwork", package: "GoogleUtilities"),
-        .product(name: "nanopb", package: "nanopb"),
+        "GoogleAppMeasurement"
       ],
       path: "GoogleAppMeasurementWrapper",
       linkerSettings: [
@@ -66,49 +40,11 @@ let package = Package(
         .linkedFramework("StoreKit"),
       ]
     ),
-    .target(
-      name: "GoogleAppMeasurementWithoutAdIdSupportTarget",
-      dependencies: [
-        "GoogleAppMeasurement",
-        .product(name: "GULAppDelegateSwizzler", package: "GoogleUtilities"),
-        .product(name: "GULMethodSwizzler", package: "GoogleUtilities"),
-        .product(name: "GULNSData", package: "GoogleUtilities"),
-        .product(name: "GULNetwork", package: "GoogleUtilities"),
-        .product(name: "nanopb", package: "nanopb"),
-      ],
-      path: "GoogleAppMeasurementWithoutAdIdSupportWrapper",
-      linkerSettings: [
-        .linkedLibrary("sqlite3"),
-        .linkedLibrary("c++"),
-        .linkedLibrary("z"),
-        .linkedFramework("StoreKit"),
-      ]
-    ),
-    .target(
-      name: "GoogleAppMeasurementOnDeviceConversionTarget",
-      dependencies: [
-        "GoogleAppMeasurementOnDeviceConversion",
-      ],
-      path: "GoogleAppMeasurementOnDeviceConversionWrapper",
-      linkerSettings: [
-        .linkedLibrary("c++"),
-      ]
-    ),
     .binaryTarget(
       name: "GoogleAppMeasurement",
       url: "https://dl.google.com/firebase/ios/swiftpm/10.4.0/GoogleAppMeasurement.zip",
       checksum: "962c7eebd5d00bc7a02ede929f11040cde9af03ee147b0582b479da8eba79ecf"
-    ),
-    .binaryTarget(
-      name: "GoogleAppMeasurementIdentitySupport",
-      url: "https://dl.google.com/firebase/ios/swiftpm/10.4.0/GoogleAppMeasurementIdentitySupport.zip",
-      checksum: "496fc898ad3dbe95cd832fb9a417fbd87810be44a4fc0b17c8b0ce176407fd6d"
-    ),
-    .binaryTarget(
-      name: "GoogleAppMeasurementOnDeviceConversion",
-      url: "https://dl.google.com/firebase/ios/swiftpm/10.4.0/GoogleAppMeasurementOnDeviceConversion.zip",
-      checksum: "744e7e2521c3e1fff5794a3f4da5f0436e050b15b36cf570b853f32649ac7898"
-    ),
+    )
   ],
   cLanguageStandard: .c99,
   cxxLanguageStandard: CXXLanguageStandard.gnucxx14

@@ -40,11 +40,10 @@ let package = Package(
         .linkedFramework("StoreKit"),
       ]
     ),
-    .binaryTarget(
-      name: "GoogleAppMeasurement",
-      url: "https://dl.google.com/firebase/ios/swiftpm/10.4.0/GoogleAppMeasurement.zip",
-      checksum: "962c7eebd5d00bc7a02ede929f11040cde9af03ee147b0582b479da8eba79ecf"
-    )
+     .binaryTarget(
+            name: "GoogleAppMeasurement",
+            path: "Frameworks/GoogleAppMeasurement.xcframework"
+        )
   ],
   cLanguageStandard: .c99,
   cxxLanguageStandard: CXXLanguageStandard.gnucxx14
